@@ -7,6 +7,7 @@ export default new Vuex.Store({
   state: {
     className: '',
     tableName: '',
+    timestamps: true,
     columns: []
   },
   mutations: {
@@ -26,6 +27,9 @@ export default new Vuex.Store({
     },
     updateTableName(state, value) {
       state.tableName = value;
+    },
+    updateTimestamps(state, value) {
+      state.timestamps = value;
     }
   },
   actions: {
@@ -49,6 +53,9 @@ export default new Vuex.Store({
     },
     UPDATE_TABLE_NAME({ commit }, value) {
       commit('updateTableName', value);
+    },
+    UPDATE_TIMESTAMPS({ commit }, value) {
+      commit('updateTimestamps', value);
     }
   },
   getters: {

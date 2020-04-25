@@ -18,7 +18,7 @@
                 Schema::create('{{ this.$store.state.tableName }}', function (Blueprint $table) {
                     $table->id();
                     {{ columns }}
-                    $table->timestamps();
+                    {{ $store.state.timestamps ? '$table->timestamps();' : '' }}
                 });
             }
 

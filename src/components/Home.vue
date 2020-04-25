@@ -10,6 +10,10 @@
                         <v-text-field v-model="className" label="Class Name" />
                         <v-text-field v-model="tableName" label="Table Name" />
 
+                        <v-row>
+                            <v-switch v-model="timestamps" class="ma-2" label="Timestamps"></v-switch>
+                        </v-row>
+
                         <v-btn color="primary" @click="addColumn">Add Column</v-btn>
                     </v-form>
                 </v-card-text>
@@ -57,6 +61,14 @@ export default {
                 this.$store.dispatch('UPDATE_TABLE_NAME', value);
             }
         },
+        timestamps: {
+            get() {
+                return this.$store.state.timestamps;
+            },
+            set(value) {
+                this.$store.dispatch('UPDATE_TIMESTAMPS', value);
+            }
+        }
     },
     methods: {
         addColumn() {
