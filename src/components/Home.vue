@@ -1,0 +1,67 @@
+<template>
+    <v-row>
+        <v-col>
+            <v-card>
+                <v-card-title>
+                    Table Schema
+                </v-card-title>
+                <v-card-text>
+                    <v-form>
+                        <v-text-field v-model="className" label="Class Name" />
+                        <v-text-field v-model="tableName" label="Table Name" />
+
+                        <v-btn color="primary" @click="addColumn">Add Column</v-btn>
+                    </v-form>
+                </v-card-text>
+            </v-card>
+            <v-divider class="my-4" />
+            <Column v-for="(column, $index) in columns" :key="$index" :index="$index" />
+        </v-col>
+        <v-col>
+            <v-card>
+                <v-card-title>
+                    Preview
+                </v-card-title>
+
+                <v-card-text>
+                    <ClassPreview />
+                </v-card-text>
+            </v-card>
+        </v-col>
+    </v-row>
+</template>
+
+<script>
+import Column from "./Column";
+import ClassPreview from "./ClassPreview";
+import { mapState } from "vuex";
+
+export default {
+    name: "Home",
+    components: { Column, ClassPreview },
+    computed: {
+        ...mapState(['columns']),
+        className: {
+            get() {
+                return this.$store.state.className;
+            },
+            set(value) {
+                this.$store.dispatch('UPDATE_CLASS_NAME', value);
+            }
+        },
+        tableName: {
+            get() {
+                return this.$store.state.tableName;
+            },
+            set(value) {
+                this.$store.dispatch('UPDATE_TABLE_NAME', value);
+            }
+        },
+    },
+    methods: {
+        addColumn() {
+            this.$store.dispatch('ADD_COLUMN');
+        }
+    }
+}
+</script>
