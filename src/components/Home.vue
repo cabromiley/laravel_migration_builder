@@ -19,7 +19,7 @@
             <v-card class="mb-4">
                 <v-card-title>Columns</v-card-title>
                 <v-card-text>
-                    <Column v-for="(column, $index) in columns" :key="$index" :index="$index" />
+                    <Column v-for="(column, $index) in columns" :key="$index" :internal-index="$index" />
                     <v-btn color="primary" @click="addColumn">Add Column</v-btn>
                 </v-card-text>
             </v-card>

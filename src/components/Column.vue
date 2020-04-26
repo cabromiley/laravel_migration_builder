@@ -14,6 +14,8 @@
                     <v-row>
                         <v-switch v-model="nullable" class="ma-2" label="Nullable"></v-switch>
                         <v-switch v-model="unsigned" class="ma-2" label="Unsigned"></v-switch>
+                        <v-switch v-model="unique" class="ma-2" label="Unique"></v-switch>
+                        <v-switch v-model="index" class="ma-2" label="Index"></v-switch>
                     </v-row>
                 </v-expansion-panel-content>
             </v-expansion-panel>
@@ -25,7 +27,7 @@
 
 <script>
 export default {
-    props: { index: { type: Number, required: true } },
+    props: { internalIndex: { type: Number, required: true } },
     data: () => ({
         items: [
             { text: 'String', value: 'string'},
@@ -90,14 +92,14 @@ export default {
     }),
     computed: {
         column() {
-            return this.$store.getters.column(this.index);
+            return this.$store.getters.column(this.internalIndex);
         },
         name: {
             get() {
                 return this.column.name;
             },
             set(name) {
-                this.$store.dispatch('UPDATE_COLUMN_NAME', { index: this.index, name });
+                this.$store.dispatch('UPDATE_COLUMN_NAME', { index: this.internalIndex, name });
             }
         },
         type: {
@@ -105,7 +107,7 @@ export default {
                 return this.column.type;
             },
             set(type) {
-                this.$store.dispatch('UPDATE_COLUMN_TYPE', { index: this.index, type });
+                this.$store.dispatch('UPDATE_COLUMN_TYPE', { index: this.internalIndex, type });
             }
         },
         comment: {
@@ -113,7 +115,7 @@ export default {
                 return this.column.comment;
             },
             set(comment) {
-                this.$store.dispatch('UPDATE_COLUMN_COMMENT', { index: this.index, comment });
+                this.$store.dispatch('UPDATE_COLUMN_COMMENT', { index: this.internalIndex, comment });
             }
         },
         nullable: {
@@ -121,7 +123,7 @@ export default {
                 return this.column.nullable;
             },
             set(nullable) {
-                this.$store.dispatch('UPDATE_COLUMN_NULLABLE', { index: this.index, nullable });
+                this.$store.dispatch('UPDATE_COLUMN_NULLABLE', { index: this.internalIndex, nullable });
             }
         },
         unsigned: {
@@ -129,13 +131,29 @@ export default {
                 return this.column.unsigned;
             },
             set(unsigned) {
-                this.$store.dispatch('UPDATE_COLUMN_UNSIGNED', { index: this.index, unsigned });
+                this.$store.dispatch('UPDATE_COLUMN_UNSIGNED', { index: this.internalIndex, unsigned });
+            }
+        },
+        unique: {
+            get() {
+                return this.column.unique;
+            },
+            set(unique) {
+                this.$store.dispatch('UPDATE_COLUMN_UNIQUE', { index: this.internalIndex, unique });
+            }
+        },
+        index: {
+            get() {
+                return this.column.index;
+            },
+            set(index) {
+                this.$store.dispatch('UPDATE_COLUMN_INDEX', { index: this.internalIndex, value: index });
             }
         }
     },
     methods: {
         onDelete() {
-            this.$store.dispatch('DELETE_COLUMN', this.index);
+            this.$store.dispatch('DELETE_COLUMN', this.internalIndex);
         }
     }
 }

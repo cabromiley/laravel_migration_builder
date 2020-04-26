@@ -46,8 +46,12 @@ export default {
             const addComment = (column) => (column.comment !== '') ? `->comment('${column.comment}')` : '';
             const isNullable = (column) => (column.nullable) ? '->nullable()' : '';
             const addUnsigned = (column) => (column.unsigned) ? '->unsigned()' : '';
+            const addUnique = (column) => (column.unique) ? '->unique()' : '';
+            const addIndex = (column) => (column.index) ? '->index()' : '';
 
-            return columns.map((c) => `${addBase(c)}${addComment(c)}${isNullable(c)}${addUnsigned(c)};`).join('\r\n                ');
+            return columns
+                .map((c) => `${addBase(c)}${addComment(c)}${isNullable(c)}${addUnsigned(c)}${addUnique(c)}${addIndex(c)};`)
+                .join('\r\n                ');
         }
     }
 }
