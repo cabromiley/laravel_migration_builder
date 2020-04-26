@@ -11,6 +11,9 @@
                 <v-expansion-panel-header>Other</v-expansion-panel-header>
                 <v-expansion-panel-content>
                     <v-textarea v-model="comment" single-line rows="1" label="Comment" />
+                    <v-row>
+                        <v-switch v-model="nullable" class="ma-2" label="Nullable"></v-switch>
+                    </v-row>
                 </v-expansion-panel-content>
             </v-expansion-panel>
         </v-expansion-panels>
@@ -116,6 +119,14 @@ export default {
             },
             set(comment) {
                 this.$store.dispatch('UPDATE_COLUMN_COMMENT', { index: this.index, comment });
+            }
+        },
+        nullable: {
+            get() {
+                return this.column.nullable;
+            },
+            set(nullable) {
+                this.$store.dispatch('UPDATE_COLUMN_NULLABLE', { index: this.index, nullable });
             }
         }
     },
