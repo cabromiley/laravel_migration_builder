@@ -13,6 +13,7 @@
                     <v-textarea v-model="comment" single-line rows="1" label="Comment" />
                     <v-row>
                         <v-switch v-model="nullable" class="ma-2" label="Nullable"></v-switch>
+                        <v-switch v-model="unsigned" class="ma-2" label="Unsigned"></v-switch>
                     </v-row>
                 </v-expansion-panel-content>
             </v-expansion-panel>
@@ -85,12 +86,6 @@ export default {
             { text: 'uuid', value: 'uuid'},
             { text: 'year', value: 'year'},
             { text: 'Integer', value: 'integer' }
-        ],
-        modifiers: [
-            { text: 'autoIncrement', value: 'autoIncrement'},
-            { text: 'unsigned', value: 'unsigned'},
-            { text: 'useCurrent', value: 'useCurrent'},
-            { text: 'always', value: 'always'},
         ]
     }),
     computed: {
@@ -127,6 +122,14 @@ export default {
             },
             set(nullable) {
                 this.$store.dispatch('UPDATE_COLUMN_NULLABLE', { index: this.index, nullable });
+            }
+        },
+        unsigned: {
+            get() {
+                return this.column.unsigned;
+            },
+            set(unsigned) {
+                this.$store.dispatch('UPDATE_COLUMN_UNSIGNED', { index: this.index, unsigned });
             }
         }
     },

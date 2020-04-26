@@ -1,5 +1,5 @@
 <template>
-    <pre lang="php">
+    <pre class="overflow-x: scroll" lang="php">
         &lt;?php
 
         use Illuminate\Database\Migrations\Migration;
@@ -45,8 +45,9 @@ export default {
             const addBase = (column) => `$table->${column.type ? column.type.toLowerCase() : ''}('${column.name}')`
             const addComment = (column) => (column.comment !== '') ? `->comment('${column.comment}')` : '';
             const isNullable = (column) => (column.nullable) ? '->nullable()' : '';
+            const addUnsigned = (column) => (column.unsigned) ? '->unsigned()' : '';
 
-            return columns.map((c) => `${addBase(c)}${addComment(c)}${isNullable(c)};`).join('\r\n                ');
+            return columns.map((c) => `${addBase(c)}${addComment(c)}${isNullable(c)}${addUnsigned(c)};`).join('\r\n                ');
         }
     }
 }

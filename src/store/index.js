@@ -13,7 +13,8 @@ export default new Vuex.Store({
         name: 'id',
         type: 'increments',
         comment: '',
-        nullable: false
+        nullable: false,
+        unsigned: false
       }
     ]
   },
@@ -45,7 +46,8 @@ export default new Vuex.Store({
         name: '',
         type: '',
         comment: '',
-        nullable: false
+        nullable: false,
+        unsigned: false
       })
     },
     UPDATE_COLUMN_NAME({ commit }, { index, name }) {
@@ -59,6 +61,9 @@ export default new Vuex.Store({
     },
     UPDATE_COLUMN_NULLABLE({ commit }, { index, nullable }) {
       commit('updateColumnValue', { index, col: 'nullable', value: nullable })
+    },
+    UPDATE_COLUMN_UNSIGNED({ commit }, { index, unsigned }) {
+      commit('updateColumnValue', { index, col: 'unsigned', value: unsigned })
     },
     DELETE_COLUMN({ commit }, index) {
       commit('deleteColumn', index);

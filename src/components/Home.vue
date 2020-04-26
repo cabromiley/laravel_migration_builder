@@ -1,6 +1,6 @@
 <template>
     <v-row>
-        <v-col>
+        <v-col cols="12" md="6">
             <v-card class="mb-4">
                 <v-card-title>
                     Table Schema
@@ -24,7 +24,7 @@
                 </v-card-text>
             </v-card>
         </v-col>
-        <v-col>
+        <v-col cols="12" md="6">
             <v-card>
                 <v-card-title>
                     Preview
