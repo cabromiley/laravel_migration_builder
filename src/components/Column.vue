@@ -1,18 +1,14 @@
 <template>
-    <v-card class="mb-4">
-        <v-card-title>Column</v-card-title>
-        <v-card-text>
-            <v-form>
-                <v-text-field v-model="name" label="Column Name" />
-                <v-select
-                v-model="type"
-                :items="items"
-                label="Type"
-                ></v-select>
-                <v-btn color="error" @click="onDelete">Delete</v-btn>
-            </v-form>
-        </v-card-text>
-    </v-card>
+    <v-form>
+        <v-text-field v-model="name" label="Column Name" />
+        <v-select
+        v-model="type"
+        :items="items"
+        label="Type"
+        ></v-select>
+        <v-btn color="error" @click="onDelete">Delete</v-btn>
+        <v-divider class="my-4"/>
+    </v-form>
 </template>
 
 <script>
@@ -78,6 +74,12 @@ export default {
             { text: 'uuid', value: 'uuid'},
             { text: 'year', value: 'year'},
             { text: 'Integer', value: 'integer' }
+        ],
+        modifiers: [
+            { text: 'autoIncrement', value: 'autoIncrement'},
+            { text: 'unsigned', value: 'unsigned'},
+            { text: 'useCurrent', value: 'useCurrent'},
+            { text: 'always', value: 'always'},
         ]
     }),
     computed: {

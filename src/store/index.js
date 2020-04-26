@@ -8,7 +8,12 @@ export default new Vuex.Store({
     className: '',
     tableName: '',
     timestamps: true,
-    columns: []
+    columns: [
+      {
+        name: 'id',
+        type: 'increments'
+      }
+    ]
   },
   mutations: {
     pushColumn(state, payload) {

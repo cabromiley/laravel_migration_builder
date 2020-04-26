@@ -16,7 +16,6 @@
             public function up()
             {
                 Schema::create('{{ this.$store.state.tableName }}', function (Blueprint $table) {
-                    $table->id();
                     {{ columns }}
                     {{ $store.state.timestamps ? '$table->timestamps();' : '' }}
                 });
@@ -43,7 +42,7 @@ export default {
         columns() {
             const columns = this.$store.state.columns;
 
-            return columns.map((c) => `$table->${c.type ? c.type.toLowerCase() : ''}('${c.name}');`).join('\r\n');
+            return columns.map((c) => `$table->${c.type ? c.type.toLowerCase() : ''}('${c.name}');`).join('\r\n                ');
         }
     }
 }
