@@ -6,6 +6,14 @@
         :items="items"
         label="Type"
         ></v-select>
+        <v-expansion-panels class="mb-4" flat popout>
+            <v-expansion-panel>
+                <v-expansion-panel-header>Other</v-expansion-panel-header>
+                <v-expansion-panel-content>
+                    <v-textarea v-model="comment" single-line rows="1" label="Comment" />
+                </v-expansion-panel-content>
+            </v-expansion-panel>
+        </v-expansion-panels>
         <v-btn color="error" @click="onDelete">Delete</v-btn>
         <v-divider class="my-4"/>
     </v-form>
@@ -100,6 +108,14 @@ export default {
             },
             set(type) {
                 this.$store.dispatch('UPDATE_COLUMN_TYPE', { index: this.index, type });
+            }
+        },
+        comment: {
+            get() {
+                return this.column.comment;
+            },
+            set(comment) {
+                this.$store.dispatch('UPDATE_COLUMN_COMMENT', { index: this.index, comment });
             }
         }
     },

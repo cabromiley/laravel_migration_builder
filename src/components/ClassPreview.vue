@@ -42,7 +42,10 @@ export default {
         columns() {
             const columns = this.$store.state.columns;
 
-            return columns.map((c) => `$table->${c.type ? c.type.toLowerCase() : ''}('${c.name}');`).join('\r\n                ');
+            const addBase = (column) => `$table->${column.type ? column.type.toLowerCase() : ''}('${column.name}');`
+            const addComment = (column) => (column.comment !== '') ? `->comment('${column.comment}')` : '';
+
+            return columns.map((c) => `${addBase(c)}${addComment(c)}`).join('\r\n                ');
         }
     }
 }

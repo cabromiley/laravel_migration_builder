@@ -11,7 +11,8 @@ export default new Vuex.Store({
     columns: [
       {
         name: 'id',
-        type: 'increments'
+        type: 'increments',
+        comment: ''
       }
     ]
   },
@@ -41,7 +42,8 @@ export default new Vuex.Store({
     ADD_COLUMN({ commit }) {
       commit('pushColumn', {
         name: '',
-        type: ''
+        type: '',
+        comment: ''
       })
     },
     UPDATE_COLUMN_NAME({ commit }, { index, name }) {
@@ -49,6 +51,9 @@ export default new Vuex.Store({
     },
     UPDATE_COLUMN_TYPE({ commit }, { index, type }) {
       commit('updateColumnValue', { index, col: 'type', value: type })
+    },
+    UPDATE_COLUMN_COMMENT({ commit }, { index, comment }) {
+      commit('updateColumnValue', { index, col: 'comment', value: comment })
     },
     DELETE_COLUMN({ commit }, index) {
       commit('deleteColumn', index);
